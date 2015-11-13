@@ -1,0 +1,45 @@
+
+#center-canvas {
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -o-crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;    
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+    .wrapper:before {
+        padding-top: 56.25%; /*16:9 ratio*/
+        display: block;
+        content: '';
+    }
+
+.main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0; /*fill parent*/
+    /*background-color: rgb(0, 162, 232);*/
+    /*I wanted it to look good :)*/
+    font-family: 'Arial', Helvetica, Sans-Serif;
+    /*color: white;*/
+}

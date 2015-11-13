@@ -1,0 +1,4 @@
+C:\Projects\CardTest\CardTest\obj\Debug\CardTest.Migrations.ini.resources
+C:\Projects\CardTest\CardTest\obj\Debug\CardTest.Migrations.ini2.resources
+C:\Projects\CardTest\CardTest\obj\Debug\CardTest.Migrations.ini3.resources
+C:\Projects\CardTest\CardTest\obj\Debug\CardTest.csproj.GenerateResource.Cache

@@ -1,0 +1,7 @@
+.boardFrame {
+    position: relative;
+    width:1000px;
+    height:120px;
+    border:solid;
+    border-width:1px;
+}

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>The Lobby!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div ng-controller="LobbyCtrl" style="margin-top: 50px;">
+
+
+
+    <div class="container">
+        <div class="row clearfix" style="margin: 20px 0 20px 0">
+            <div class="col-md-1 column">
+                <button type="button" class="btn btn-default" ng-click="match()">Match</button>
+                <div ng-switch="user.status">
+                    <div ng-switch-when="Matching">matching</div>
+                    <div ng-switch-default>...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</html>

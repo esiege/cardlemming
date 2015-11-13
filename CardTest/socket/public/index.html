@@ -1,0 +1,215 @@
+<html ng-app="myApp">
+<head>
+	<title>The resource cannot be found.</title>
+	<meta http-equiv="content-type" content="text/html; utf-8">
+</head>
+<script type="text/javascript" src="js/lib/glMatrix-0.9.5.min.js"></script>
+<script type="text/javascript" src="js/lib/webgl-utils.js"></script>
+
+<script type="x-shader/x-vertex" id="vertex_particlePuffs">
+
+			uniform float amplitude;
+			attribute float size;
+			attribute vec3 customColor;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				vColor = customColor;
+
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+				//gl_PointSize = size;
+				gl_PointSize = size * ( 300.0 / length( mvPosition.xyz ) );
+
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+
+</script>
+
+<script type="x-shader/x-fragment" id="fragment_particlePuffs">
+
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				gl_FragColor = vec4( color * vColor, 1.0 );
+				gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+			}
+
+</script>
+
+
+<!--style="background-image: url(images/bg.png)"-->
+<body ng-controller='MainCtrl'>
+
+<iframe src="http://localhost/CommercialLicensing/#/search" style="width: 100%; height: 100%; position: absolute"></iframe>
+
+<div style="height: 100%;  { {BGIncog}}margin-top: 0px ; padding-top: 1px ">
+	<!--<button ng-click="setScreen('Login')" class="btn btn-small label label-default">Login</button>
+	<button ng-click="setScreen('Engaged')" class="btn btn-small label label-default">Engaged</button>-->
+
+	<div ng-switch on="screenType" style=" { {opacIncog}}">
+		<div ng-switch-when="Grid">
+			<div ng-controller="GridCtrl">
+				<!--ng-init="webGLStart()"-->
+				<canvas ng-init="webGLStart()" id="center-canvas" width="1920" height="1080"></canvas>
+			</div>
+		</div>
+		<div ng-switch-when="Engaged">
+			<div ng-include src="'Project/Engaged/engagedHTML.html'"></div>
+		</div>
+		<div ng-switch-when="Lobby">
+			<div ng-include src="'Project/Lobby/lobbyHTML.html'"></div>
+		</div>
+		<div ng-switch-when="Card">
+			<div ng-include src="'Project/Card/Views/cardHTML.html'"></div>
+		</div>
+		<div ng-switch-default>
+			<div ng-include src="'Project/Login/loginHTML.html'"></div>
+			<input type="button" ng-click="quick()" value="quick">
+		</div>
+	</div>
+
+
+
+	<!--misc-->
+	<script src="js/misc/pen.js"></script>
+	<script src="js/misc/watch.js"></script>
+	<script src="js/lib/underscore.js"></script>
+	<script src="js/misc/clone.js"></script>
+
+	<!--css-->
+	<link href="Content/css/elements.css" rel="stylesheet"/>
+	<link href="Content/css/layout.css" rel="stylesheet"/>
+	<link href="Content/css/characters.css" rel="stylesheet"/>
+	<link href="Content/css/board.css" rel="stylesheet"/>
+	<link href="Content/css/canvas.css" rel="stylesheet"/>
+
+	<!-- jquery -->
+	<script src="js/lib/jquery-1.10.2.min.js"></script>
+
+	<!--bootstrap-->
+	<link href="Content/css/bootstrap/bootstrap.css" rel="stylesheet"/>
+	<script src="js/lib/bootstrap.min.js"></script>
+
+	<!-- box2djs -->
+	<script src="js/lib/Box2dWeb-2.1.a.3.js"></script>
+
+
+
+	<!-- angular -->
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/angular/app.js"></script>
+	<script src="js/angular/controllers.js"></script>
+	<script src="js/angular/directives.js"></script>
+	<script src="js/angular/filters.js"></script>
+	<script src="js/angular/services.js"></script>
+	<script src="js/angular/Factories/update.js"></script>
+	<script src="js/angular/Factories/query.js"></script>
+	<script src="js/angular/Factories/peer.min.js"></script>
+
+	<!--babylon-->
+	<!-- <script src="js/lib/babylon.1.12.js"></script>
+	<script src="js/Babylon/bab_draw.js"></script>
+	<script src="js/Babylon/functions/merge.js"></script>-->
+
+	<!--three.js-->
+	<script src="js/lib/three.js"></script>
+	<script src="js/lib/ThreeCSG.js"></script>
+	<script src="js/Three/three_draw.js"></script>
+
+	<!-- webgl -->
+	<!-- <script src="js/webGL/webgl_draw.js"></script>
+	<script src="js/webGL/vertexDefs/webgl_primitives.js"></script>
+	<script src="js/webGL/loaders/webgl_vertex.js"></script>
+	<script src="js/webGL/loaders/webgl_gl_init.js"></script>
+	<script src="js/webGL/loaders/webgl_textures.js"></script>-->
+
+	<!--canvas-->
+	<script src="Project/_Core/init.js"></script>
+	<!--<script src="js/Canvas/helpers.js"></script>-->
+	<!--<script src="js/Canvas/levels.js"></script>-->
+	<!--<script src="js/Canvas/objects.js"></script>-->
+	<!--<script src="js/Canvas/sprite.js"></script>-->
+	<script src="js/Canvas/update.js"></script>
+	<script src="js/Canvas/animationState.js"></script>
+	<script src="js/Canvas/player.js"></script>
+	<script src="Project/_Core/bits.js"></script>
+
+	<script src="Project/_Core/body.js"></script>
+	<script src="Project/_Core/joint.js"></script>
+	<script src="Project/_Core/listener.js"></script>
+	<script src="Project/_Core/objectDefs.js"></script>
+
+
+	<!--directives-->
+	<script src="Project/_Directives/base/js/base.js"></script>
+	<script src="Project/_Directives/sprites/js/character.js"></script>
+	<script src="Project/_Directives/UI/js/action-button.js"></script>
+
+	<!--factories-->
+	<script src="Project/_Factories/userFactory.js"></script>
+	<script src="Project/_Factories/pageFactory.js"></script>
+
+
+	<!--project-->
+	<!--MainScreen-->
+	<script src="Project/MainScreen/mainScreenController.js"></script>
+	<!--Login-->
+	<script src="Project/Login/loginController.js"></script>
+	<!--Lobby-->
+	<script src="Project/Lobby/lobbyController.js"></script>
+	<!--Actions-->
+	<script src="Project/_Actions/generics/actionController.js"></script>
+	<script src="Project/Grid/functions/actionDefs/swings.js"></script>
+
+
+
+	<script src="Project/Card/Controllers/cardMainController.js"></script>
+	<script src="Project/Card/Services/cardBody.js"></script>
+	<script src="Project/Card/Services/cardService.js"></script>
+	<script src="Project/Card/Services/canvasService.js"></script>
+	<script src="Project/Card/Services/roomService.js"></script>
+
+
+
+
+	<!--Engaged-->
+	<!-- <script src="Project/Engaged/engagedMain.js"></script>
+	<script src="Project/Engaged/engagedController.js"></script>
+	<script src="Project/Engaged/engagedActionDefinitions.js"></script>-->
+	<!--Grid-->
+	<!-- <script src="Project/Grid/gridMain.js"></script>
+	<script src="Project/Grid/gridController.js"></script>
+	<script src="Project/Grid/gridActionDefinitions.js"></script>
+	<script src="Project/Grid/gridUpdate.js"></script>
+	<script src="Project/Grid/gridListener.js"></script>
+	<script src="Project/Grid/functions/gridInput.js"></script>
+	<script src="Project/Grid/functions/gridDef.js"></script>
+	<script src="Project/Grid/functions/gridUserSprite.js"></script>
+	<script src="Project/Grid/functions/gridSocketGet.js"></script>
+	<script src="Project/Grid/functions/gridSocketSend.js"></script>
+	<script src="Project/Grid/functions/gridInitializer.js"></script>
+	<script src="Project/Grid/functions/gridObjects.js"></script>
+	<script src="Project/Grid/functions/gridBody.js"></script>
+	<script src="Project/Grid/functions/gridStaticSprite.js"></script>
+	<script src="Project/Grid/functions/gridMovePc.js"></script>
+	<script src="Project/Grid/resources/equippablesResource.js"></script>-->
+
+
+
+	<!--misc-->
+	<script src="js/misc/keycodes.js"></script>
+
+	<!--load last-->
+	<script src="/socket.io/socket.io.js"></script>
+</div>
+</body>
+</html>

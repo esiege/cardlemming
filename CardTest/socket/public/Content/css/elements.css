@@ -1,0 +1,40 @@
+/* app css stylesheet */
+
+.actionButton {
+    float: left;
+    height: 40px;
+    width: 40px;
+    overflow-y: auto;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 2px #888888;
+    margin: 0px 5px 0 0px;
+    cursor: pointer;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
+    .actionButton:hover {
+        box-shadow: 0px 0px 5px #888888;
+    }
+
+    .actionButton:active {
+        margin: 1px 5px 0 0px;
+        box-shadow: 0px 0px 3px #888888;
+    }
+
+.actionButtonText {
+    margin: 20px 0 0 4px;
+    font-size: x-small;
+    font-weight: 900;
+    box-shadow: 0px 0px 3px #888888;
+    border-radius: 10px;
+    width:14px;
+    text-align: center;
+}
+
+.actionButtonTray {
+    height: 52px;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid #000;
+}
